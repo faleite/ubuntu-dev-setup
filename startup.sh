@@ -219,6 +219,38 @@ sudo apt-get update && sudo apt-get install peek -y
 # sudo git clone https://github.com/puneetsl/lotion.git /usr/local/lotion
 # cd /usr/local/lotion && sudo ./install.sh
 
+echo "Installing Terminator terminal emulator"
+# Atualiza os repositórios e instala o Terminator
+sudo apt update
+sudo apt install -y terminator
+# Configura o Terminator como terminal padrão (substituindo o GNOME Terminal)
+echo "Setting Terminator as the default terminal"
+
+# Atualiza o terminal padrão usando a configuração do update-alternatives
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/terminator 50
+sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
+
+# # Cria uma configuração básica para o Terminator (opcional)
+# echo "Applying basic configuration for Terminator"
+
+# # Cria a pasta de configuração do Terminator, se não existir
+# mkdir -p ~/.config/terminator
+
+# # Escreve uma configuração básica para o Terminator
+# cat <<EOL > ~/.config/terminator/config
+# [global_config]
+#   enabled_plugins = []
+# [keybindings]
+# [profiles]
+#   [[default]]
+#     background_color = "#1e1e1e"
+#     foreground_color = "#c5c8c6"
+#     cursor_color = "#c5c8c6"
+#     font = Monospace 12
+#     scrollbar_position = hidden
+# EOL
+echo "Installation and configuration complete. You can now use Terminator as your default terminal."
+
 echo 'Updating and Cleaning Unnecessary Packages'
 sudo -- sh -c 'apt-get update; apt-get upgrade -y; apt-get full-upgrade -y; apt-get autoremove -y; apt-get autoclean -y'
 clear
